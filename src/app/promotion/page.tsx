@@ -104,7 +104,7 @@ export default function Promotions() {
     className="lg:block sm:hidden flex justify-center "  // Center the image in the div
   >
     <img
-      src="/promotion.png"
+      src="/soccer.png"
       alt="Promotion"
       className="max-w-[450px] h-auto object-contain"
     />

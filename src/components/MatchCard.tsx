@@ -8,6 +8,7 @@ interface MatchCardProps {
   teamB: string;
   time: string;
   odds: number;
+  status: string; // <-- you need to add this!
   onPlaceBet: (matchId: number) => void;
 }
 
@@ -17,6 +18,7 @@ export default function MatchCard({
   teamB,
   time,
   odds,
+  status,
   onPlaceBet,
 }: MatchCardProps) {
   const matchTime = new Date(time).toLocaleString();
@@ -33,7 +35,12 @@ export default function MatchCard({
         {teamA} <span className="text-gray-500">vs</span> {teamB}
       </div>
 
-      <div className="text-sm text-gray-500 mb-4">{matchTime}</div>
+      <div className="text-sm text-gray-500 mb-2">{matchTime}</div>
+
+      {/* New: Status */}
+      <div className="text-xs font-semibold text-blue-500 uppercase mb-4">
+        {status}
+      </div>
 
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm text-gray-600 font-medium">Reverse Odds:</span>

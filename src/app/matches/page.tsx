@@ -4,11 +4,20 @@ import { useState } from "react";
 import Link from "next/link";
 import MatchList from "@/components/MatchList";
 import FilterBar from "@/components/FilterBar";
+import { useRouter } from 'next/navigation'; // ✅ Correct
+
 
 export default function MatchesPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const router = useRouter();
+    const [matchType, setMatchType] = useState('All Matches');
+  
+    const handlePlaceBet = (matchId: number) => {
+      router.push(`/my-bets?matchId=${matchId}`);
+  }
 
   return (
     <div className="bg-gradient-to-b from-[#0f172a] to-[#1e293b] min-h-screen py-20 px-6 sm:px-12 text-white font-sans">
@@ -84,7 +93,7 @@ export default function MatchesPage() {
 
       {/* Match List */}
       <div className="space-y-6">
-        <MatchList />
+        <MatchList onPlaceBet={handlePlaceBet} matchType={matchType} />
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const History = () => {
     >
       <h3 className="text-lg font-semibold text-blue-500 mb-4">History</h3>
       {transactions.map((transaction, index) => (
-        <Link key={index} href="/transactions" passHref> 
+        <Link key={index} href="/dashboard/transactions" passHref> 
           <motion.div
             className="flex items-center justify-between py-4 border-b border-gray-200 cursor-pointer"
             initial={{ opacity: 0, x: -20 }}

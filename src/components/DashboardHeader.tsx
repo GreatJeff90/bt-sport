@@ -11,8 +11,8 @@ export default function Header() {
   const navLinks = [
     { label: 'Profile', href: '/dashboard/profile' },
     { label: 'My Bets', href: '/dashboard/my-bets' },
-    { label: 'Transactions', href: '/transactions' },
-    { label: 'Referrals', href: '/referrals' },
+    { label: 'Transactions', href: '/dashboard/transactions' },
+    { label: 'Referrals', href: '/dashboard/referrals' },
   ];
 
   return (

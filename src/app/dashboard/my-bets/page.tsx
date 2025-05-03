@@ -18,7 +18,7 @@ export default function MyBets() {
       <UserProfile />
 
       {/* List of Reverse Bets */}
-      <ReverseBetList onCancel={handleCancelBet} filterStatus="All" />
+      <ReverseBetList onCancel={handleCancelBet}/>
 
       <History />
       <Spacer />

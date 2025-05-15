@@ -27,7 +27,7 @@ const UserProfile = () => {
           <div>
             <p className="text-sm text-gray-600">Available Balance</p>
             <h3 className="text-2xl font-bold text-blue-600">
-              {isBalanceVisible ? '₦600.00' : '****'}
+              {isBalanceVisible ? '₦1500' : '****'}
             </h3>
           </div>
           <button

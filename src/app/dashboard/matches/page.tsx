@@ -9,6 +9,10 @@ import FilterBar from '@/components/FilterBar';
 
 export default function MatchesPage() {
   const router = useRouter();
+
+  // State for filters
+  const [searchTerm, setSearchTerm] = useState('');
+  const [league, setLeague] = useState('All Leagues');
   const [matchType, setMatchType] = useState('All Matches');
 
   const handlePlaceBet = (matchId: number) => {
@@ -22,19 +26,28 @@ export default function MatchesPage() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
     >
-      {/* Page Title */}
       <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-700 mb-8 tracking-tight">
         Available Matches
       </h1>
 
-      {/* Filters */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-        <FilterBar />
-      </div>
+      {/* Pass filter state and setters to FilterBar */}
+      <FilterBar
+        searchTerm={searchTerm}
+        league={league}
+        matchType={matchType}
+        onSearchChange={setSearchTerm}
+        onLeagueChange={setLeague}
+        onMatchTypeChange={setMatchType}
+      />
 
-      {/* Match List */}
       <div className="space-y-6">
-        <MatchList onPlaceBet={handlePlaceBet} matchType={matchType} />
+        {/* Pass filters to MatchList */}
+        <MatchList
+          onPlaceBet={handlePlaceBet}
+          searchTerm={searchTerm}
+          selectedLeague={league}
+          matchType={matchType}
+        />
       </div>
     </motion.div>
   );

@@ -6,9 +6,11 @@ interface MatchCardProps {
   id: number;
   teamA: string;
   teamB: string;
+  homeLogo: string;   // <-- add this
+  awayLogo: string;   // <-- add this
   time: string;
   odds: number;
-  status: string; // <-- you need to add this!
+  status: string;
   onPlaceBet: (matchId: number) => void;
 }
 
@@ -16,6 +18,8 @@ export default function MatchCard({
   id,
   teamA,
   teamB,
+  homeLogo,
+  awayLogo,
   time,
   odds,
   status,
@@ -31,16 +35,21 @@ export default function MatchCard({
       viewport={{ once: true }}
       className="bg-blue-50 border border-blue-100 rounded-2xl shadow p-6"
     >
-      <div className="text-lg sm:text-xl font-semibold text-blue-800 mb-2">
-        {teamA} <span className="text-gray-500">vs</span> {teamB}
+      <div className="flex items-center gap-3 text-lg sm:text-xl font-semibold text-blue-800 mb-2">
+        {/* Home team logo */}
+        <img src={homeLogo} alt={`${teamA} logo`} className="w-8 h-8 object-contain" />
+        {/* Home team name */}
+        <span>{teamA}</span>
+        <span className="text-gray-500">vs</span>
+        {/* Away team name */}
+        <span>{teamB}</span>
+        {/* Away team logo */}
+        <img src={awayLogo} alt={`${teamB} logo`} className="w-8 h-8 object-contain" />
       </div>
 
       <div className="text-sm text-gray-500 mb-2">{matchTime}</div>
 
-      {/* New: Status */}
-      <div className="text-xs font-semibold text-blue-500 uppercase mb-4">
-        {status}
-      </div>
+      <div className="text-xs font-semibold text-blue-500 uppercase mb-4">{status}</div>
 
       <div className="flex justify-between items-center mb-4">
         <span className="text-sm text-gray-600 font-medium">Reverse Odds:</span>

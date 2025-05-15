@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { TrendingUp, Trophy, Users } from "lucide-react";
 
 const stats = [
-  { label: "Total Earnings", value: "₦500,000", icon: <TrendingUp size={24} /> },
-  { label: "Total Bets", value: "150", icon: <Trophy size={24} /> },
-  { label: "Referrals", value: "30", icon: <Users size={24} /> },
+  { label: "Total Earnings", value: "₦0", icon: <TrendingUp size={24} /> },
+  { label: "Total Bets", value: "0", icon: <Trophy size={24} /> },
+  { label: "Referrals", value: "0", icon: <Users size={24} /> },
 ];
 
 export default function StatsCard() {

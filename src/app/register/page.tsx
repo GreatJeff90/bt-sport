@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";  // Import useRouter for navigation
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
@@ -10,26 +11,64 @@ export default function Register() {
   const [dob, setDob] = useState("");
   const [password, setPassword] = useState("");
   const [referral, setReferral] = useState("");
+  const router = useRouter();  // Initialize the router
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form submitted with data:", { fullName, email, phone, dob, password, referral });
+  
+    try {
+      const res = await fetch("/api/auth/register", {  // Corrected the URL
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fullName, email, phone, dob, password, referral }),
+      });
+
+      console.log("Response status:", res.status);
+
+      const text = await res.text();
+      console.log("Raw response text:", text);
+
+      if (!res.ok) {
+        alert(text || "Registration failed");
+        return;
+      }
+
+      const data = JSON.parse(text);
+      console.log("Response data:", data);  // Added this log
+
+      if (data.error) {
+        alert(data.error || "Registration failed");
+        return;
+      }
+
+      // alert("Registration successful!");
+      router.push("/signin");  // Use Next.js router for redirection
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert("Something went wrong");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e293b] flex items-center justify-center px-4 py-12">
-          <div className="max-w-md w-full bg-[#0f172a] border border-blue-800 rounded-2xl p-8 shadow-lg shadow-blue-900/40 backdrop-blur-md">
-              <div className="flex justify-center mb-6">
-  <Image
-    src="/logo.png"
-    alt="Logo"
-    width={140}
-    height={40}
-    className="object-contain"
-    priority
-  />
-</div>
+      <div className="max-w-md w-full bg-[#0f172a] border border-blue-800 rounded-2xl p-8 shadow-lg shadow-blue-900/40 backdrop-blur-md">
+        <div className="flex justify-center mb-6">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={140}
+            height={40}
+            className="object-contain"
+            priority
+          />
+        </div>
 
         <h2 className="text-3xl sm:text-4xl font-extrabold text-blue-300 text-center mb-6">
           Create Your Account
         </h2>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-blue-200 mb-1">Full Name</label>
             <input
